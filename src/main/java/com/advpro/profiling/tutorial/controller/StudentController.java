@@ -30,7 +30,12 @@ public class StudentController {
     @GetMapping("/highest-gpa")
     public ResponseEntity<String> highestGpa() {
         Optional<Student> studentWithHighestGpa = studentService.findStudentWithHighestGpa();
-        return ResponseEntity.ok(studentWithHighestGpa.get().toString());
+        
+        if (studentWithHighestGpa.isPresent()) {
+            return ResponseEntity.ok(studentWithHighestGpa.get().toString());
+        } else {
+            return ResponseEntity.ok("No student found");
+        }
     }
     @GetMapping("/all-student-name")
     public ResponseEntity<String> allStudentName() {
